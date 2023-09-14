@@ -29,13 +29,12 @@ const CustomCard = ({ title, link, id }: ICustomCardProps) => {
 };
 
 type IUserProps = {
-  user: IDataProps[];
+  user: IDataProps[] | undefined;
   loading: boolean;
-  error: string | null | undefined;
+  error: Error | null;
 };
 
 export default function CardsComponent({ user, error, loading }: IUserProps) {
-  console.log(user);
 
   return (
     <Box maxWidth={"1500px"} m={"0 auto"} p={2}>
@@ -58,7 +57,7 @@ export default function CardsComponent({ user, error, loading }: IUserProps) {
         {error ? (
           <Box width={"100%"} py={8}>
             <Box display={"flex"} justifyContent={"center"}>
-              <Alert severity="error">{error}</Alert>
+              <Alert severity="error">{error.message}</Alert>
             </Box>
           </Box>
         ) : (
