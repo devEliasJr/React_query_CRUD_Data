@@ -1,12 +1,12 @@
 import { Box } from "@mui/material";
 import CardsComponents from "../../components/cards";
-import useUserApi from "../../hooks/useUserApi";
+import { useUserData } from "../../hooks/useUserApiQuery";
 
 export default function HomePage() {
-  const { users, error, loading } = useUserApi();
+  const {data: users, error, isLoading} = useUserData()
   return (
     <Box>
-      <CardsComponents user={users} error={error} loading={loading} />
+      <CardsComponents user={users} error={error} loading={isLoading} />
     </Box>
   );
 }
