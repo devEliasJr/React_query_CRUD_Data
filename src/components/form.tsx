@@ -2,21 +2,20 @@ import { Box, Button, FormControl, Paper, TextField } from "@mui/material";
 import { useState } from "react";
 
 import { useNavigate } from "react-router-dom";
-import { useUserMutate } from "../hooks/useUserMutate";
+import { useCreateUserMutate } from "../hooks/useUserMutate";
 
 export default function FormComponent() {
   const [name, setName] = useState("");
   const [url, setUrl] = useState("");
 
   const navigate = useNavigate();
-  const { mutate } = useUserMutate();
+  const { mutate } = useCreateUserMutate();
 
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const userData = {
-      id: Math.random(),
       name,
       url,
       description: "Description",
