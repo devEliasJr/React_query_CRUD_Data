@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Modal, Button, TextField, Box } from "@mui/material";
 import { useGetUserById } from "../hooks/useUserApiQuery";
 import { useUpdateUserMutate } from "../hooks/useUserMutate";
+import SaveAsIcon from '@mui/icons-material/SaveAs';
 
 type EditUserModalProps = {
   isOpen: boolean;
@@ -79,7 +80,7 @@ const EditUserModal: React.FC<EditUserModalProps> = ({
           margin="normal"
         />
         <Box display={"flex"} justifyContent={"center"} gap={4} py={2}>
-          <Button variant="contained" color="primary" onClick={handleSave}>
+          <Button startIcon={<SaveAsIcon />} variant="contained" color="success" onClick={handleSave}>
             Save
           </Button>
           <Button variant="outlined" onClick={onClose}>

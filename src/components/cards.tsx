@@ -15,11 +15,12 @@ import { useState } from "react";
 
 import EditUserModal from "./modal";
 import { useDeleteUserMutate } from "../hooks/useUserMutate";
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
 
 const CustomCard = ({ title, link, id }: ICustomCardProps) => {
   const [userId, setUserId] = useState<number | undefined>();
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-
 
   const { mutate } = useDeleteUserMutate();
 
@@ -59,8 +60,12 @@ const CustomCard = ({ title, link, id }: ICustomCardProps) => {
       <CardContent>Teste Content</CardContent>
       <Divider />
       <CardActions>
-        <Button onClick={() => handleEdit(id)}>Edit</Button>
-        <Button onClick={() => handleDelete(id)}>Delete</Button>
+        <Button startIcon={<EditIcon />} variant="contained" color="secondary" onClick={() => handleEdit(id)}>
+          Edit
+        </Button>
+        <Button startIcon={<DeleteIcon />} variant="contained" color="primary" onClick={() => handleDelete(id)}>
+          Delete
+        </Button>
       </CardActions>
       {/* Modal de edição */}
       <EditUserModal

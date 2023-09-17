@@ -7,7 +7,7 @@ export function useGetAllUsersQuery () {
     queryFn: getAllData,
     queryKey: ["users"],
     retry: false,
-    refetchInterval: 5 * 60 * 1000 // 5 minutes
+    refetchInterval: 5 * 1000
   })
 
   return query 
