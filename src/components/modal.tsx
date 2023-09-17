@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Modal, Button, TextField, Box } from "@mui/material";
 import { useGetUserById } from "../hooks/useUserApiQuery";
 import { useUpdateUserMutate } from "../hooks/useUserMutate";
-import SaveAsIcon from '@mui/icons-material/SaveAs';
+import SaveAsIcon from "@mui/icons-material/SaveAs";
 
 type EditUserModalProps = {
   isOpen: boolean;
@@ -31,13 +31,7 @@ const EditUserModal: React.FC<EditUserModalProps> = ({
 
   const { data } = useGetUserById(userId);
   const { mutate } = useUpdateUserMutate();
-
-  useEffect(() => {
-    if (data) {
-      setName(data.name);
-      setUrl(data.url);
-    }
-  }, [data]);
+  
 
   const handleSave = async () => {
     const userData = {
@@ -53,6 +47,13 @@ const EditUserModal: React.FC<EditUserModalProps> = ({
     mutate(dataEditProps);
     onClose();
   };
+
+  useEffect(() => {
+    if (data) {
+      setName(data.name);
+      setUrl(data.url);
+    }
+  }, [data]);
 
   return (
     <Modal
@@ -80,7 +81,12 @@ const EditUserModal: React.FC<EditUserModalProps> = ({
           margin="normal"
         />
         <Box display={"flex"} justifyContent={"center"} gap={4} py={2}>
-          <Button startIcon={<SaveAsIcon />} variant="contained" color="success" onClick={handleSave}>
+          <Button
+            startIcon={<SaveAsIcon />}
+            variant="contained"
+            color="success"
+            onClick={handleSave}
+          >
             Save
           </Button>
           <Button variant="outlined" onClick={onClose}>

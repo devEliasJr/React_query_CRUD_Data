@@ -9,6 +9,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import { Button } from "@mui/material";
 import { NavLink } from "react-router-dom";
+import { useQueryContext } from "../Contexts/useQueryContext";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -53,6 +54,8 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function SearchAppBar() {
+  const { query, setQuery } = useQueryContext();
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -88,7 +91,6 @@ export default function SearchAppBar() {
                 Create
               </Button>
             </NavLink>
-            
           </Typography>
           <Search>
             <SearchIconWrapper>
@@ -97,6 +99,10 @@ export default function SearchAppBar() {
             <StyledInputBase
               placeholder="Search…"
               inputProps={{ "aria-label": "search" }}
+              onChange={(e) => {
+                setQuery(e.target.value);
+              }}
+              value={query}
             />
           </Search>
         </Toolbar>

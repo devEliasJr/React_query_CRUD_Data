@@ -7,7 +7,7 @@ export function useGetAllUsersQuery () {
     queryFn: getAllData,
     queryKey: ["users"],
     retry: false,
-    refetchInterval: 5 * 1000
+    refetchInterval: false
   })
 
   return query 
@@ -18,6 +18,7 @@ export function useGetUserById (id: number) {
     queryFn: () => getUserById(id),
     queryKey: ["user"],
     retry: false,
+    refetchInterval: false,
     enabled: !!id
   })
 
