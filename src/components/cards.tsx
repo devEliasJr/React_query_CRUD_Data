@@ -1,17 +1,50 @@
 import {
   Alert,
   Box,
+  Button,
   Card,
+  CardActions,
   CardContent,
   CardMedia,
+  Divider,
   Grid,
   Typography,
 } from "@mui/material";
 import SkeletonComponent from "./skeleton";
+import { useState } from "react";
+
+import EditUserModal from "./modal";
+import { useDeleteUserMutate } from "../hooks/useUserMutate";
 
 const CustomCard = ({ title, link, id }: ICustomCardProps) => {
+  const [userId, setUserId] = useState<number | undefined>();
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+
+
+  const { mutate } = useDeleteUserMutate();
+
+  const handleEdit = async (id: number) => {
+    setUserId(id);
+    setIsEditModalOpen(true);
+  };
+
+  const handleCloseEditModal = () => {
+    setIsEditModalOpen(false);
+  };
+
+  const handleDelete = async (id: number) => {
+    const shouldDelete = window.confirm(
+      "Are you sure you want to delete this user?"
+    );
+
+    if (shouldDelete) {
+      mutate(id);
+    }
+  };
+
   return (
     <Card key={id}>
+      {/* <EditCardModal /> */}
       <CardContent>
         <Typography component={"h5"}>{title}</Typography>
       </CardContent>
@@ -24,6 +57,17 @@ const CustomCard = ({ title, link, id }: ICustomCardProps) => {
       />
 
       <CardContent>Teste Content</CardContent>
+      <Divider />
+      <CardActions>
+        <Button onClick={() => handleEdit(id)}>Edit</Button>
+        <Button onClick={() => handleDelete(id)}>Delete</Button>
+      </CardActions>
+      {/* Modal de edição */}
+      <EditUserModal
+        isOpen={isEditModalOpen}
+        onClose={handleCloseEditModal}
+        userId={Number(userId)}
+      />
     </Card>
   );
 };
@@ -35,7 +79,6 @@ type IUserProps = {
 };
 
 export default function CardsComponent({ user, error, loading }: IUserProps) {
-
   return (
     <Box maxWidth={"1500px"} m={"0 auto"} p={2}>
       <Grid container spacing={2}>
