@@ -20,3 +20,7 @@ interface IDataEditProps {
   userId: number;
   data: UserData;
 }
+
+interface IReactFcProps {
+  children: ReactNode;
+}
